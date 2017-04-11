@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.ProductBrowserPanel">
+  <grid id="27dc6" binding="productBrowse" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="30" left="30" bottom="30" right="30"/>
+    <constraints>
+      <xy x="20" y="20" width="639" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none" title=""/>
+    <children>
+      <component id="9fe54" class="javax.swing.JTable" binding="table1" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="6" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="300" height="300"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="cd627" class="javax.swing.JButton" binding="logOutButton" default-binding="true">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Log Out"/>
+        </properties>
+      </component>
+      <component id="47007" class="javax.swing.JButton" binding="viewCartButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="View Cart"/>
+        </properties>
+      </component>
+      <component id="2ed00" class="javax.swing.JButton" binding="clearCartButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Clear Cart"/>
+        </properties>
+      </component>
+      <component id="277db" class="javax.swing.JButton" binding="addToCartButton" default-binding="true">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Add To Cart"/>
+        </properties>
+      </component>
+      <component id="50b04" class="javax.swing.JButton" binding="myAccountButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="My Account"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
