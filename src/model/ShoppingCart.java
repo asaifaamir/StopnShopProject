@@ -31,14 +31,12 @@ public class ShoppingCart implements Serializable
     /**
      * Adds an item to the ShoppingCart
      * @param item a product to add to shopping cart
-     * @precondition a ShoppingCart object must exist
-     * @postcondition an item is added to the cart
      */
     public void add(Product item)
     {
       items.add(item);
 
-      if(!items.isEmpty())
+      if(!items.isEmpty()) //in case item added isn't valid, verify
       {
         isEmpty = false;
       }
@@ -47,8 +45,6 @@ public class ShoppingCart implements Serializable
     /**
      * Removes an item from the cart via item ID
      * @param itemID a Product ID
-     * @precondition ShoppingCart must not be empty
-     * @postcondition Selected item is removed from the cart
      */
     public void remove(String itemID) 
     {
@@ -118,8 +114,8 @@ public class ShoppingCart implements Serializable
     }
     
     /**
-     * Checks to see if the cart is completely empty
-     * @return true or false if the cart is empty or not empty
+     * Checks to see if the cart is empty
+     * @return true if cart is empty, otherwise false
      */
     public boolean isEmpty() 
     {

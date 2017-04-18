@@ -46,7 +46,7 @@ public abstract class Account implements Serializable
 
   /**
    * Returns the first name of the account holder
-   * @return a String representation of the Account holders first name
+   * @return a String representation of the account holders first name
    */
   public String getFirstName()
   {
@@ -55,7 +55,7 @@ public abstract class Account implements Serializable
   
   /**
    * Returns the last name of the account holder
-   * @return a String representation of the Account holders last name
+   * @return a String representation of the account holders last name
    */
   public String getLastName()
   {
@@ -63,8 +63,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Returns the user name of the Account object
-   * @return a String representation of the Accounts user name
+   * Returns the user name of the account holder
+   * @return a String representation of the account holders user name
    */
   public String getUserName()
   {
@@ -72,8 +72,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Returns the password of the Account object
-   * @return a String representation of the Accounts password
+   * Returns the password of the account holder
+   * @return a String representation of the account holders password
    */
   public String getPassword() 
   {
@@ -81,8 +81,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Returns the credit card number of the Account object
-   * @return a String representation of the Accounts credit card number
+   * Returns the credit card number of the account holder
+   * @return a String representation of the account holders credit card number
    */
   public String getCreditCard() 
   {
@@ -90,8 +90,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Returns the CCV of the credit card associated with the Account object
-   * @return a String representation of the Accounts credit card CCV number
+   * Returns the CCV of the credit card associated with the account holder
+   * @return a String representation of the account holders credit card CCV number
    */
   public String getCCV() 
   {
@@ -99,8 +99,8 @@ public abstract class Account implements Serializable
   }
   
   /**
-   * Returns the expiration date of the credit card associated with the Account object
-   * @return a String representation of the Accounts credit card expiration date
+   * Returns the expiration date of the credit card associated with the account holder
+   * @return a String representation of the account holders credit card expiration date
    */
   public String getExpDate() 
   {
@@ -108,8 +108,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Sets a first name for the Account object
-   * @param firstName the full name of the account holder
+   * Sets a first name for the account holder
+   * @param firstName the first name of the account holder
    */
   public void setFirstName(String firstName) 
   {
@@ -117,7 +117,7 @@ public abstract class Account implements Serializable
   }
   
   /**
-   * Sets a last name for the Account object
+   * Sets a last name for the account holder
    * @param lastName the last name of the account holder
    */
   public void setLastName(String lastName) 
@@ -126,7 +126,7 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Sets a user name for the Account object
+   * Sets a user name for the account holder
    * @param userName the user name of the account holder
    */
   public void setUserName(String userName)
@@ -135,8 +135,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Sets a password for the Account object
-   * @param password a password for the Account object
+   * Sets a password for the account holder
+   * @param password a password for the account holder
    */
   public void setPassword(String password) 
   {
@@ -144,8 +144,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Sets a credit card number for the Account object
-   * @param creditCard a credit card number for the Account object
+   * Sets a credit card number for the account holder
+   * @param creditCard a credit card number for the account holder
    */
   public void setCreditCard(String creditCard)
   {
@@ -153,8 +153,8 @@ public abstract class Account implements Serializable
   }
 
   /**
-   * Sets a CCV number for the credit card on the Account Object
-   * @param ccv a CCV number for the Account object
+   * Sets a CCV number for the credit card on the account holder
+   * @param ccv a CCV number for the account holder
    */
   public void setCCV(String ccv)
   {
@@ -162,8 +162,8 @@ public abstract class Account implements Serializable
   }
   
   /**
-   * Sets an expiration date for the credit card on the Account Object
-   * @param expDate an expiration date for the Account object
+   * Sets an expiration date for the credit card of the account holder
+   * @param expDate an expiration date for the account holder
    */
   public void setExpDate(String expDate)
   {

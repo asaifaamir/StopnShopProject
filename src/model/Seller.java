@@ -20,6 +20,7 @@ public class Seller extends Account implements Serializable
     public Seller(String firstName, String lastName, String userName, 
             String password, String creditCard, String ccvNumber, String expDate)
     {
+      // Call Account constructor to make Seller a "Seller Account"
       super(firstName, lastName, userName, password, creditCard, ccvNumber, expDate);
       sellersList = new ProductList();
     }
@@ -36,7 +37,7 @@ public class Seller extends Account implements Serializable
     
     /**
      * Retrieves the inventory of the Seller
-     * @return a reference to the inventory of the Seller 
+     * @return the inventory of the Seller 
      */
     public ProductList getList() 
     {

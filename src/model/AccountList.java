@@ -1,6 +1,6 @@
 package Model;
 
-import ShoeCart_Interface.AccountListWrapper;
+import StopNShop_Interface.AccountListWrapper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class AccountList implements AccountListWrapper, Serializable
   }
 
   /**
-   * Inserts Account objects and its derivatives into the list
+   * Inserts Account objects into the account list
    * @param data a Account object to insert into list
    */
   @Override
@@ -61,7 +61,7 @@ public class AccountList implements AccountListWrapper, Serializable
   /**
    * Searches for an account in the list
    * @param userName a String representing the user name of the account to search for
-   * @return if the account is found or not, true or false respectively
+   * @return if the account is found return true, otherwise return false
    */
   @Override
   public boolean search(String userName)
@@ -81,7 +81,8 @@ public class AccountList implements AccountListWrapper, Serializable
 
   /**
    * Retrieves an account from the list
-   * @param userName a String representing the user name of the account to retrieve from the list
+   * @param userName a String representing the user name of the account to 
+   * retrieve from the list
    * @return the account specified by user name
    */
   @Override

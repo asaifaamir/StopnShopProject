@@ -20,6 +20,7 @@ public class Customer extends Account implements Serializable
   public Customer(String firstName, String lastName, String userName,
           String password, String creditCard, String ccvNumber, String expDate)
   {
+    // Call Account constructor to make Customer a "Customer Account"
     super(firstName, lastName, userName, password, creditCard, ccvNumber, expDate);
     customersShoppingCart = new ShoppingCart();
   }

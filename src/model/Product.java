@@ -58,7 +58,7 @@ public class Product implements Serializable
   }
 
   /**
-   * Returns type of the Product object (I.E. Food, Electronics, etc..)
+   * Returns type of the Product object
    * @return product type in the form of a String object
    */
   public String getType() 
@@ -131,7 +131,7 @@ public class Product implements Serializable
 
   /**
    * Sets a product type for the Product Object
-   * @param type a product type (Ex. Food, Furniture, etc..)
+   * @param type a product type
    */
   public void setType(String type)
   {
@@ -201,8 +201,7 @@ public class Product implements Serializable
   /**
    * Compares to products to see if they are the same
    * @param otherProduct Product object to compare with
-   * @return returns true if the products are the same, or false if they are
-   * not the same
+   * @return returns true if the products are the same, returns false otherwise
    */
   @Override
   public boolean equals(Object otherProduct) 
