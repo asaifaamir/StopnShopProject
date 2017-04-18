@@ -36,22 +36,14 @@ public class MainSystem
       }
     }
 
-    /**
-     * an AccountList object 
-     * This variable is essentially the data model of this application
-     */
+    // Our main object that holds pretty much all of the data
     AccountList stopNShopDatabase;
 
-    // Creates a new file object 
+    // Creates a new file object so we can store a local database 
     File f = new File("stopNShopDatabase.dat");
 
-    // Checks to see if the file object f is a file and if it can be read
-    // essentially this is here to check if the file exists in the directory
-    // it is suppose to be in. If the file is not in the directory it belongs
-    // in it just pulls an existing instance of the kitteCreationDataBase from
-    // the AccountList class. If the file does exist in the directory it
-    // belongs in, it will deserialize the file into the variable. The
-    // AccountList class was implemented using the Singleton design pattern.
+    // Check to see if the file (database) exists. If it does, read from that
+    // file. If it doesn't then get a new instance.
     if(f.isFile() && f.canRead())
     {
       ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
@@ -63,11 +55,10 @@ public class MainSystem
       stopNShopDatabase = AccountList.getInstance();
     }
 
-    // Create a new instance of the LandingScreen Jframe
+    // The landing page JFrame to the sign in screen
     SignInScreen startScreen = new SignInScreen(stopNShopDatabase);
 
     // Set default close operation to exiting if window closes
-    // and set the display location 
     startScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     startScreen.setLocationRelativeTo(null); 
     startScreen.setVisible(true); 
@@ -81,7 +72,8 @@ public class MainSystem
       {
         try 
         {
-          ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("stopNShopDatabase.dat"));
+          ObjectOutputStream out = new ObjectOutputStream(
+                  new FileOutputStream("stopNShopDatabase.dat"));
           out.writeObject(stopNShopDatabase);
           out.close();
         }
