@@ -1,6 +1,6 @@
 package Model;
 
-import StopNShop_Interface.AccountListWrapper;
+import Interface.AccountListWrapper;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;

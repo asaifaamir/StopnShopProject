@@ -1,6 +1,6 @@
 package Controller;
 
-import View.SignInScreen;
+import View.LoginPanel;
 import Model.AccountList;
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,14 +55,12 @@ public class MainSystem
       stopNShopDatabase = AccountList.getInstance();
     }
 
+    //Updated upstream
     // The landing page JFrame to the sign in screen
-    SignInScreen startScreen = new SignInScreen(stopNShopDatabase);
+    LoginPanel login = new LoginPanel();
 
-    // Set default close operation to exiting if window closes
-    startScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    startScreen.setLocationRelativeTo(null); 
-    startScreen.setVisible(true); 
-    startScreen.setResizable(false);
+    // Create a new instance of the LandingScreen Jframe
+     //Stashed changes
 
     // This runs a thread when the compiler detects that the program is exiting
     Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() 
