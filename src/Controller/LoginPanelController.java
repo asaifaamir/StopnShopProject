@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class LoginPanelController {
 
-    AccountList database;
+    AccountList database = AccountList.getInstance();
 
     /**
      * Login Action for the LoginPanel View which reacts to Login Button
@@ -31,35 +31,24 @@ public class LoginPanelController {
         String username = userNameField.getText();
         char[] password = passwordField1.getPassword();
 
-        if ((username.equals("Hello")) || password.equals("123"))
-        {
-            JOptionPane.showMessageDialog(null, "Welcome: " + username, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Please verify that the username and password are correct", "Incorrect Login", JOptionPane.WARNING_MESSAGE);
-        };
-/*
         if (database.search(username))
         {
-            if (password.equals(database.retrieve(username).getPassword()))
+            if (isPasswordCorrect(username, password))
             {
                 if (database.retrieve(username).getClass() == Customer.class)
                 {
-                    Session newSession = new Session(username);
+                    Session userSession = new Session(username);
                     JOptionPane.showMessageDialog(null, "Welcome: " + username, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
-                    ProductBrowserPanel customerScreen = new ProductBrowserPanel(database, newSession);
-                    customerScreen.setVisible(true);
+                    ProductBrowserPanel customerScreen = new ProductBrowserPanel(userSession);
                 }
-
                 else if (database.retrieve(username).getClass() == Seller.class)
                 {
-                    Session newSession = new Session(username);
+                    Session userSession = new Session(username);
                     JOptionPane.showMessageDialog(null, "Welcome: " + username, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
-                    NewProductPanel sellerScreen = new NewProductPanel(newSession);
-                    sellerScreen.setVisible(true);
+                    NewProductPanel sellerScreen = new NewProductPanel(userSession);
+
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Please verify that the username and password are correct", "Incorrect Login", JOptionPane.WARNING_MESSAGE);
@@ -69,11 +58,17 @@ public class LoginPanelController {
         }else
         {
             JOptionPane.showMessageDialog(null, "Please verify that the username and password are correct", "Incorrect Login", JOptionPane.WARNING_MESSAGE);
-        }*/
+        }
 
     }
 
-    /*private boolean isPasswordCorrect(String username, char[] password) {
+    /**
+     * Private method to check the password for the username
+     * @param username username to check the password for
+     * @param password password entered
+     * @return
+     */
+    private boolean isPasswordCorrect(String username, char[] password) {
         boolean isCorrect = true;
         char[] correctPassword = (database.retrieve(username).getPassword()).toCharArray();
 
@@ -87,7 +82,7 @@ public class LoginPanelController {
         Arrays.fill(correctPassword,'0');
 
         return isCorrect;
-    }*/
+    }
 
     /**
      * Register Action for the LoginPanel View which reacts to RegisterationButton

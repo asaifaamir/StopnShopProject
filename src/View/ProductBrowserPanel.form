@@ -1,61 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View.ProductBrowserPanel">
-  <grid id="27dc6" binding="productBrowse" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="30" left="30" bottom="30" right="30"/>
+  <grid id="27dc6" binding="productBrowse" layout-manager="CardLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="639" height="400"/>
+      <xy x="20" y="20" width="738" height="488"/>
     </constraints>
-    <properties/>
+    <properties>
+      <minimumSize width="500" height="219"/>
+      <preferredSize width="500" height="615"/>
+      <requestFocusEnabled value="true"/>
+    </properties>
     <border type="none" title=""/>
     <children>
-      <component id="9fe54" class="javax.swing.JTable" binding="table1" default-binding="true">
+      <grid id="9ee20" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="6" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="300" height="300"/>
-          </grid>
+          <card name="Card1"/>
         </constraints>
         <properties/>
-      </component>
-      <component id="cd627" class="javax.swing.JButton" binding="logOutButton" default-binding="true">
-        <constraints>
-          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Log Out"/>
-        </properties>
-      </component>
-      <component id="47007" class="javax.swing.JButton" binding="viewCartButton" default-binding="true">
-        <constraints>
-          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="View Cart"/>
-        </properties>
-      </component>
-      <component id="2ed00" class="javax.swing.JButton" binding="clearCartButton" default-binding="true">
-        <constraints>
-          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Clear Cart"/>
-        </properties>
-      </component>
-      <component id="277db" class="javax.swing.JButton" binding="addToCartButton" default-binding="true">
-        <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Add To Cart"/>
-        </properties>
-      </component>
-      <component id="50b04" class="javax.swing.JButton" binding="myAccountButton" default-binding="true">
-        <constraints>
-          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="My Account"/>
-        </properties>
-      </component>
+        <border type="none"/>
+        <children>
+          <grid id="b1912" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <hspacer id="97f43">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+              <component id="f09e8" class="javax.swing.JButton" binding="myAccountButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="My Account"/>
+                </properties>
+              </component>
+              <component id="822e6" class="javax.swing.JButton" binding="logOutButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Log Out"/>
+                </properties>
+              </component>
+              <component id="a646d" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font name="Monospaced" size="28" style="1"/>
+                  <text value="One Stop Shop"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="35232" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="cd992" class="javax.swing.JButton" binding="addToCartButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Add To Cart"/>
+                </properties>
+              </component>
+              <component id="29f8f" class="javax.swing.JButton" binding="viewCartButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="View Cart"/>
+                </properties>
+              </component>
+              <component id="98e41" class="javax.swing.JButton" binding="clearCartButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Clear Cart"/>
+                </properties>
+              </component>
+              <component id="c6094" class="javax.swing.JLabel" binding="jLabel1">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Total:"/>
+                </properties>
+              </component>
+              <component id="8cd10" class="javax.swing.JTextArea" binding="cartTotal">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                </constraints>
+                <properties>
+                  <text value="$ 0.00"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="60b54" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <scrollpane id="c64d1">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <alignmentX value="0.5"/>
+                </properties>
+                <border type="none" title-justification="2">
+                  <font name="Monospaced" style="1"/>
+                  <title-color color="-16777216"/>
+                </border>
+                <children>
+                  <component id="69584" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <autoResizeMode value="4"/>
+                      <intercellSpacing width="3" height="1"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
