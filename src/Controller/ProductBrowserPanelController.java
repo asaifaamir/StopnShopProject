@@ -1,14 +1,12 @@
 package Controller;
 
 import Model.AccountList;
-import Model.Customer;
 import Model.Session;
 import View.CustomerInformationPanel;
 import View.LoginPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 
 /**
  * Created by asaifbutt on 4/18/17.
@@ -33,8 +31,8 @@ public class ProductBrowserPanelController {
 
     /**
      * My Account Action for the ProductBrowserPanel View which reacts to MyAccount Button
-     * @param e
-     * @param frame
+     * @param e an ActionEvent object
+     * @param frame the frame that the action is being performed on
      */
     public void myAccountButtonActionPerformed(ActionEvent e, JFrame frame) {
         frame.dispose();
@@ -43,8 +41,8 @@ public class ProductBrowserPanelController {
 
     /**
      * Log Out Action for the ProductBrowserPanel View which reacts to LogOutButton
-     * @param e
-     * @param frame
+     * @param e an ActionEvent object
+     * @param frame the frame that the action is being performed on
      */
     public void logOutButtonActionPerformed(ActionEvent e, JFrame frame) {
         frame.dispose();
@@ -53,24 +51,24 @@ public class ProductBrowserPanelController {
 
     /**
      * View Cart Action for the ProductBrowserPanel View which reacts to ViewCartButton
-     * @param e
-     * @param frame
+     * @param e an ActionEvent object
+     * @param frame the frame that the action is being performed on
      */
     public void viewCartButtonActionPerformed(ActionEvent e, JFrame frame) {
     }
 
     /**
      * Clear cart action for the ProductBrowserPanel View which reacts to ClearCartButton
-     * @param e
-     * @param frame
+     * @param e an ActionEvent object
+     * @param frame the frame that the action is being performed on
      */
     public void clearCartButtonActionPerformed(ActionEvent e, JFrame frame) {
     }
 
     /**
      * Add to Cart action for the ProductBrowserPanel View which reacts to the Add to Cart Button
-     * @param e
-     * @param frame
+     * @param e an ActionEvent object
+     * @param frame the frame that the action is being performed on
      */
     public void addToCartButtonActionPerformed(ActionEvent e, JFrame frame) {
     }

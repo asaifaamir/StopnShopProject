@@ -7,9 +7,6 @@ import View.LoginPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by asaifbutt on 4/18/17.
@@ -108,13 +105,13 @@ public class RegistrationPanelController {
         }
 
         if(input[6].length() < 3 || input[6].length() >= 4) {
-            JOptionPane.showMessageDialog(null, "CCV number has incorrect length", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "CCV number has incorrect length.", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         if(input[7].length() > 5)
         {
-            JOptionPane.showMessageDialog(null, "Expiration date missing", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Expiration date is incorrect.", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 

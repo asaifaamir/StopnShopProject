@@ -32,6 +32,9 @@ public class RegistrationPanel extends javax.swing.JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        frame.getRootPane().setDefaultButton(registerButton);
+
+
         cancelButton.addActionListener(e -> registrationPanelController.cancelButtonActionPerformed(e, frame));
         registerButton.addActionListener(e -> registrationPanelController.registerButtonActionPerformed(e, frame, accountTypeBox, firstName, lastName, userName, password, passwordConfirm, creditCard, ccv, expDate));
 

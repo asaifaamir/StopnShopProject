@@ -38,14 +38,14 @@ public class LoginPanelController {
                 if (database.retrieve(username).getClass() == Customer.class)
                 {
                     Session userSession = new Session(username);
-                    JOptionPane.showMessageDialog(null, "Welcome: " + username, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "WELCOME " + (username).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
                     ProductBrowserPanel customerScreen = new ProductBrowserPanel(userSession);
                 }
                 else if (database.retrieve(username).getClass() == Seller.class)
                 {
                     Session userSession = new Session(username);
-                    JOptionPane.showMessageDialog(null, "Welcome: " + username, "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "WELCOME " + (username).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
                     NewProductPanel sellerScreen = new NewProductPanel(userSession);
 

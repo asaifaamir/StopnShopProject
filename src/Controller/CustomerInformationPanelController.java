@@ -23,6 +23,7 @@ public class CustomerInformationPanelController {
     private JTextField creditCardField;
     private JTextField ccvField;
     private JTextField expirationDateField;
+    private JLabel titleField;
     private boolean edit = false;
 
 
@@ -30,7 +31,7 @@ public class CustomerInformationPanelController {
      * Creates a CustomerInformationPanelController object
      * @param currentUser the current user logged in
      */
-    public CustomerInformationPanelController(Session currentUser, JTextField firstName, JTextField lastName, JTextField userName, JTextField password, JTextField creditCard, JTextField ccv, JTextField expirationDate) {
+    public CustomerInformationPanelController(Session currentUser, JTextField firstName, JTextField lastName, JTextField userName, JTextField password, JTextField creditCard, JTextField ccv, JTextField expirationDate, JLabel title) {
         currentUserSession = currentUser;
         currentUserInfo = database.retrieve(currentUser.getUserInSession());
         firstNameField = firstName;
@@ -40,8 +41,17 @@ public class CustomerInformationPanelController {
         creditCardField = creditCard;
         ccvField = ccv;
         expirationDateField = expirationDate;
-
+        titleField = title;
         getAccountInfo();
+        setTitle();
+    }
+
+    /**
+     * A method to set the Title of the Account page by retrieving the first name of the current user from the database
+     */
+    private void setTitle()
+    {
+        titleField.setText(currentUserInfo.getFirstName().toUpperCase() + "'S ACCOUNT");
     }
 
     /**
@@ -56,6 +66,8 @@ public class CustomerInformationPanelController {
         creditCardField.setText(currentUserInfo.getCreditCard());
         ccvField.setText(currentUserInfo.getCCV());
         expirationDateField.setText(currentUserInfo.getExpDate());
+
+
     }
 
     /**
@@ -67,7 +79,8 @@ public class CustomerInformationPanelController {
         if (!edit) {
             edit = true;
             backButton.setEnabled(false);
-            updateAccountButton.setText("Update Changes");
+            updateAccountButton.setText("Save Changes");
+            userNameField.setEditable(false);
             firstNameField.setEditable(true);
             lastNameField.setEditable(true);
             passwordField.setEditable(true);
@@ -76,88 +89,82 @@ public class CustomerInformationPanelController {
         }
         else if (edit)
         {
-            String[] allUserInput = new String[5];
-            allUserInput[0] = firstNameField.getText().trim();
-            allUserInput[1] = lastNameField.getText().trim();
-            allUserInput[2] = passwordField.getText().trim();
-            allUserInput[3] = creditCardField.getText().trim();
-            allUserInput[4] = ccvField.getText().trim();
+            String[] userInput = new String[5];
+            userInput[0] = firstNameField.getText().trim();
+            userInput[1] = lastNameField.getText().trim();
+            userInput[2] = passwordField.getText().trim();
+            userInput[3] = creditCardField.getText().trim();
+            userInput[4] = ccvField.getText().trim();
 
-        }
-
-
-        /*if(!editState) {
-            editState = true;
-            goBackButton.setEnabled(false);
-            editButton.setText("Save Changes");
-            nameField.setEditable(true);
-            passwordField.setEditable(true);
-            creditcardField.setEditable(true);
-            ccvField.setEditable(true);
-        }
-        else if(editState) {
-            String[] allUserInput = new String[5];
-            allUserInput[0] = nameField.getText().trim();
-            allUserInput[2] = passwordField.getText().trim();
-            allUserInput[3] = creditcardField.getText().trim();
-            allUserInput[4] = ccvField.getText().trim();
-
-            if(allUserInput[0].length() < 1) {
-                JOptionPane.showMessageDialog(null, "Cannot leave full name field blank", "Error", JOptionPane.WARNING_MESSAGE);
+            if(userInput[0].length() < 1)
+            {
+                JOptionPane.showMessageDialog(null, "Cannot leave first name field blank", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            if(allUserInput[2].length() < 6) {
+            if(userInput[1].length() < 1)
+            {
+                JOptionPane.showMessageDialog(null, "Cannot leave last name field blank", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if(userInput[2].length() < 6)
+            {
                 JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            if(allUserInput[3].length() < 16 || allUserInput[3].length() >= 17) {
+            if(userInput[3].length() < 16 || userInput[3].length() >= 17) {
                 JOptionPane.showMessageDialog(null, "Incorrect Credit Card Length", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             else {
-                for(int i = 0; i < allUserInput[3].length(); i++) {
-                    if(Character.isDigit(allUserInput[3].charAt(i))) {
-
+                for(int i = 0; i < userInput[3].length(); i++) {
+                    if(Character.isDigit(userInput[3].charAt(i))) {
+                        // do nothing
                     }
                     else {
-                        JOptionPane.showMessageDialog(null, "credit card number cannot contains characters or symbols", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "credit card number cannot contains characters or symbols",
+                                "Error", JOptionPane.WARNING_MESSAGE);
                         return;
                     }
                 }
             }
 
-            if(allUserInput[4].length() < 3 || allUserInput[4].length() >= 4) {
-                JOptionPane.showMessageDialog(null, "CCV number has incorrect length", "Error", JOptionPane.WARNING_MESSAGE);
+            if(userInput[4].length() < 3 || userInput[4].length() >= 4) {
+                JOptionPane.showMessageDialog(null, "CCV number has incorrect length.", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            editState = false;
-            currentUser.setFullName(allUserInput[0]);
-            currentUser.setPassword(allUserInput[2]);
-            currentUser.setCreditCard(allUserInput[3]);
-            currentUser.setCCV(allUserInput[4]);
+            edit = false;
+            currentUserInfo.setFirstName(userInput[0]);
+            currentUserInfo.setLastName(userInput[1]);
+            currentUserInfo.setPassword(userInput[2]);
+            currentUserInfo.setCreditCard(userInput[3]);
+            currentUserInfo.setCCV(userInput[4]);
 
-            editButton.setText("Edit Account");
-            nameField.setEditable(false);
+            updateAccountButton.setText("Update Account");
+            userNameField.setEditable(false);
+            firstNameField.setEditable(false);
+            lastNameField.setEditable(false);
             passwordField.setEditable(false);
-            creditcardField.setEditable(false);
+            creditCardField.setEditable(false);
             ccvField.setEditable(false);
-            goBackButton.setEnabled(true);
+            backButton.setEnabled(true);
 
-            currentSession.setUserInSession(currentUser.getUserName());
+            currentUserSession.setUserInSession(currentUserInfo.getUserName());
 
-            JOptionPane.showMessageDialog(null, "Changes were successful", "Success", JOptionPane.INFORMATION_MESSAGE);
-        }*/
+            JOptionPane.showMessageDialog(null, "Account Updated!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+
+        }
+
     }
 
     /**
      * * Back Action for the CustomerInformationPanel View which reacts to BackButton
      * @param e ActionEvent object
      * @param frame The frame where the action takes place
-     * @param updateAccountButton
-     * @param backButton
      */
     public void backButtonActionPerformed(ActionEvent e, JFrame frame) {
         frame.dispose();
