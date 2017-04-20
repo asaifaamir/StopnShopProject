@@ -4,8 +4,8 @@ import Model.AccountList;
 import Model.Customer;
 import Model.Seller;
 import Model.Session;
+import View.CutomerPanel;
 import View.NewProductPanel;
-import View.ProductBrowserPanel;
 import View.RegistrationPanel;
 
 import javax.swing.*;
@@ -40,7 +40,7 @@ public class LoginPanelController {
                     Session userSession = new Session(username);
                     JOptionPane.showMessageDialog(null, "WELCOME " + (username).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
-                    ProductBrowserPanel customerScreen = new ProductBrowserPanel(userSession);
+                    CutomerPanel customerScreen = new CutomerPanel(userSession);
                 }
                 else if (database.retrieve(username).getClass() == Seller.class)
                 {

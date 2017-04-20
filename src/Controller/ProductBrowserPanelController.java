@@ -30,7 +30,7 @@ public class ProductBrowserPanelController {
     }
 
     /**
-     * My Account Action for the ProductBrowserPanel View which reacts to MyAccount Button
+     * My Account Action for the CutomerPanel View which reacts to MyAccount Button
      * @param e an ActionEvent object
      * @param frame the frame that the action is being performed on
      */
@@ -40,7 +40,7 @@ public class ProductBrowserPanelController {
     }
 
     /**
-     * Log Out Action for the ProductBrowserPanel View which reacts to LogOutButton
+     * Log Out Action for the CutomerPanel View which reacts to LogOutButton
      * @param e an ActionEvent object
      * @param frame the frame that the action is being performed on
      */
@@ -50,7 +50,7 @@ public class ProductBrowserPanelController {
     }
 
     /**
-     * View Cart Action for the ProductBrowserPanel View which reacts to ViewCartButton
+     * View Cart Action for the CutomerPanel View which reacts to ViewCartButton
      * @param e an ActionEvent object
      * @param frame the frame that the action is being performed on
      */
@@ -58,7 +58,7 @@ public class ProductBrowserPanelController {
     }
 
     /**
-     * Clear cart action for the ProductBrowserPanel View which reacts to ClearCartButton
+     * Clear cart action for the CutomerPanel View which reacts to ClearCartButton
      * @param e an ActionEvent object
      * @param frame the frame that the action is being performed on
      */
@@ -66,7 +66,7 @@ public class ProductBrowserPanelController {
     }
 
     /**
-     * Add to Cart action for the ProductBrowserPanel View which reacts to the Add to Cart Button
+     * Add to Cart action for the CutomerPanel View which reacts to the Add to Cart Button
      * @param e an ActionEvent object
      * @param frame the frame that the action is being performed on
      */

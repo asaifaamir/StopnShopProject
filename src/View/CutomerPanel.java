@@ -4,14 +4,12 @@ import Controller.ProductBrowserPanelController;
 import Model.Session;
 
 import javax.swing.*;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
 
 
 /**
  * Created by asaifbutt on 4/10/17.
  */
-public class ProductBrowserPanel{
+public class CutomerPanel {
 
     private JPanel productBrowse;
     private JTable table1;
@@ -28,7 +26,7 @@ public class ProductBrowserPanel{
      * Creates a productBrowserPanel object
      * @param userSession The current user that is loggedin
      */
-    public ProductBrowserPanel(Session userSession)
+    public CutomerPanel(Session userSession)
     {
         productBrowserPanelController = new ProductBrowserPanelController(table1, cartTotal, userSession);
         JFrame frame = new JFrame();

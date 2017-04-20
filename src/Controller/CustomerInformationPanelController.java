@@ -3,7 +3,7 @@ package Controller;
 import Model.Account;
 import Model.AccountList;
 import Model.Session;
-import View.ProductBrowserPanel;
+import View.CutomerPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -168,6 +168,6 @@ public class CustomerInformationPanelController {
      */
     public void backButtonActionPerformed(ActionEvent e, JFrame frame) {
         frame.dispose();
-        ProductBrowserPanel backToProductPanel = new ProductBrowserPanel(currentUserSession);
+        CutomerPanel backToProductPanel = new CutomerPanel(currentUserSession);
     }
 }
