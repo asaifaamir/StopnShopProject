@@ -1,23 +1,24 @@
 package Model;
 
 import Interface.AccountListWrapper;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 /**
  *
  * @author Antonio Zuniga
  */
 public class AccountList implements AccountListWrapper, Serializable 
-{   
+{
 
   /**
    * Constructs an AccountList object with a Map to hold all accounts
    */
   private AccountList() 
   {
-    accountList = new TreeMap<>();
+    accountList = new HashMap<>();
   }
 
   /**
@@ -157,7 +158,7 @@ public class AccountList implements AccountListWrapper, Serializable
     return accountList.size();
   }
 
-  private final TreeMap <Integer, Account> accountList;
+  private final HashMap<Integer, Account> accountList;
   private int accountNumberID = 0;
   private static final AccountList instance = new AccountList(); 
 }
