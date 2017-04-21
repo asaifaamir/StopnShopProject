@@ -21,6 +21,7 @@ public class CutomerPanel {
     private JTextArea cartTotal;
     private JLabel jLabel1;
     private ProductBrowserPanelController productBrowserPanelController;
+    private JButton descriptionButton;
 
     /**
      * Creates a productBrowserPanel object
@@ -53,19 +54,20 @@ public class CutomerPanel {
      */
     private void createUIComponents() {
         table1 = new JTable();
+        descriptionButton = new JButton();
         table1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
 
                 },
                 new String [] {
-                        "Product", "ProductID", "Price", "In Stock", "Quantity", "Seller", "Purchase"
+                        "Product", "ProductID", "Price", "In Stock", "Quantity", "Seller", "Description", "Purchase"
                 }
         ) {
             Class[] types = new Class [] {
-                    java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
+                    java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, descriptionButton.getClass() , java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                    false, false, false, false, true, false, true
+                    false, false, false, false, true, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {

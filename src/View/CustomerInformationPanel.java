@@ -1,6 +1,6 @@
 package View;
 
-import Controller.CustomerInformationPanelController;
+import Controller.AccountInformationPanelController;
 import Model.Session;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class CustomerInformationPanel {
     private JButton updateAccountButton;
     private JButton backButton;
     private JLabel titleNameLabel;
-    private CustomerInformationPanelController customerInfoController;
+    private AccountInformationPanelController customerInfoController;
 
 
     /**
@@ -35,10 +35,10 @@ public class CustomerInformationPanel {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        customerInfoController = new CustomerInformationPanelController(currentUser, firstName, lastName, userName, password, creditCard, ccv, expirationDate, titleNameLabel);
+        customerInfoController = new AccountInformationPanelController(currentUser, firstName, lastName, userName, password, creditCard, ccv, expirationDate, titleNameLabel);
 
-        updateAccountButton.addActionListener(e -> customerInfoController.updateAccountButtonActionPerformed(e, frame, updateAccountButton, backButton));
-        backButton.addActionListener(e -> customerInfoController.backButtonActionPerformed(e, frame));
+        updateAccountButton.addActionListener(e -> customerInfoController.updateAccountButtonActionPerformed(frame, updateAccountButton, backButton));
+        backButton.addActionListener(e -> customerInfoController.backButtonActionPerformed(frame, "customer"));
 
 
     }

@@ -5,8 +5,8 @@ import Model.Customer;
 import Model.Seller;
 import Model.Session;
 import View.CutomerPanel;
-import View.NewProductPanel;
 import View.RegistrationPanel;
+import View.SellerPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -47,7 +47,7 @@ public class LoginPanelController {
                     Session userSession = new Session(username);
                     JOptionPane.showMessageDialog(null, "WELCOME " + (username).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
-                    NewProductPanel sellerScreen = new NewProductPanel(userSession);
+                    SellerPanel sellerScreen = new SellerPanel(userSession);
 
                 }
                 else {

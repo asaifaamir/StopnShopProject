@@ -4,14 +4,14 @@ import Model.Account;
 import Model.AccountList;
 import Model.Session;
 import View.CutomerPanel;
+import View.SellerPanel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 /**
  * Created by asaifbutt on 4/19/17.
  */
-public class CustomerInformationPanelController {
+public class AccountInformationPanelController {
 
     private AccountList database = AccountList.getInstance();
     private  Session currentUserSession;
@@ -28,10 +28,10 @@ public class CustomerInformationPanelController {
 
 
     /**
-     * Creates a CustomerInformationPanelController object
+     * Creates a AccountInformationPanelController object
      * @param currentUser the current user logged in
      */
-    public CustomerInformationPanelController(Session currentUser, JTextField firstName, JTextField lastName, JTextField userName, JTextField password, JTextField creditCard, JTextField ccv, JTextField expirationDate, JLabel title) {
+    public AccountInformationPanelController(Session currentUser, JTextField firstName, JTextField lastName, JTextField userName, JTextField password, JTextField creditCard, JTextField ccv, JTextField expirationDate, JLabel title) {
         currentUserSession = currentUser;
         currentUserInfo = database.retrieve(currentUser.getUserInSession());
         firstNameField = firstName;
@@ -72,10 +72,9 @@ public class CustomerInformationPanelController {
 
     /**
      * Update Account Action for the CustomerInformationPanel View which reacts to Update Account Button
-     * @param e ActionEvent object
      * @param frame The frame where the action takes place
      */
-    public void updateAccountButtonActionPerformed(ActionEvent e, JFrame frame, JButton updateAccountButton, JButton backButton) {
+    public void updateAccountButtonActionPerformed(JFrame frame, JButton updateAccountButton, JButton backButton) {
         if (!edit) {
             edit = true;
             backButton.setEnabled(false);
@@ -163,11 +162,20 @@ public class CustomerInformationPanelController {
 
     /**
      * * Back Action for the CustomerInformationPanel View which reacts to BackButton
-     * @param e ActionEvent object
      * @param frame The frame where the action takes place
      */
-    public void backButtonActionPerformed(ActionEvent e, JFrame frame) {
+    public void backButtonActionPerformed(JFrame frame, String accountType) {
         frame.dispose();
-        CutomerPanel backToProductPanel = new CutomerPanel(currentUserSession);
+        if (accountType.equals("customer"))
+        {
+            CutomerPanel backToProductPanel = new CutomerPanel(currentUserSession);
+        }
+        if (accountType.equals("seller"))
+        {
+            SellerPanel backToSellerPanel = new SellerPanel(currentUserSession);
+        }
+    }
+
+    public void checkSalesButtonActionPerformed() {
     }
 }
