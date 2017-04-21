@@ -1,15 +1,10 @@
 package Main;
 
-import View.LoginPanel;
 import Model.AccountList;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import View.LoginPanel;
+
+import javax.swing.*;
+import java.io.*;
 /**
  *
  * @author Antonio Zuniga
@@ -39,7 +34,7 @@ public class MainSystem
     AccountList stopNShopDatabase;
 
     // Creates a new file object so we can store a local database 
-    File f = new File("stopNShopDatabase.dat");
+    File f = new File("stopNShopDatabase.ser");
 
     // Check to see if the file (database) exists. If it does, read from that
     // file. If it doesn't then get a new instance.
@@ -70,7 +65,7 @@ public class MainSystem
         try 
         {
           ObjectOutputStream out = new ObjectOutputStream(
-                  new FileOutputStream("stopNShopDatabase.dat"));
+                  new FileOutputStream("stopNShopDatabase.ser"));
           out.writeObject(stopNShopDatabase);
           out.close();
         }

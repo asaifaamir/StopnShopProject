@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Account;
 import Model.AccountList;
+import Model.Seller;
 import Model.Session;
 import View.CutomerPanel;
 import View.SellerPanel;
@@ -24,6 +25,9 @@ public class AccountInformationPanelController {
     private JTextField ccvField;
     private JTextField expirationDateField;
     private JLabel titleField;
+
+    private Seller seller;
+
     private boolean edit = false;
 
 
@@ -177,5 +181,11 @@ public class AccountInformationPanelController {
     }
 
     public void checkSalesButtonActionPerformed() {
+        seller = (Seller) database.retrieve(currentUserSession.getUserInSession());
+        String costs = "$ " + Double.toString(seller.getList().getLifeTimeListCosts());
+        String revenue = "$ " + Double.toString(seller.getRevenue());
+        String profit = "$ " + Double.toString(seller.getProfit());
+
+        JOptionPane.showMessageDialog(null, "Costs: " + costs + "\n" + "Revenue: " + revenue + "\n" + "Profit: " + profit);
     }
 }
