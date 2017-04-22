@@ -38,14 +38,14 @@ public class LoginPanelController {
                 if (database.retrieve(username).getClass() == Customer.class)
                 {
                     Session userSession = new Session(username);
-                    JOptionPane.showMessageDialog(null, "WELCOME " + (username).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "WELCOME " + (database.retrieve(username).getFirstName()).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
                     CutomerPanel customerScreen = new CutomerPanel(userSession);
                 }
                 else if (database.retrieve(username).getClass() == Seller.class)
                 {
                     Session userSession = new Session(username);
-                    JOptionPane.showMessageDialog(null, "WELCOME " + (username).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "WELCOME " + (database.retrieve(username).getFirstName()).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
                     SellerPanel sellerScreen = new SellerPanel(userSession);
 
@@ -54,10 +54,13 @@ public class LoginPanelController {
                     JOptionPane.showMessageDialog(null, "Please verify that the username and password are correct", "Incorrect Login", JOptionPane.WARNING_MESSAGE);
 
                 }
+            }else
+            {
+                JOptionPane.showMessageDialog(null, "Please verify that the username and password are correct", "Incorrect Login", JOptionPane.WARNING_MESSAGE);
             }
         }else
         {
-            JOptionPane.showMessageDialog(null, "Please verify that the username and password are correct", "Incorrect Login", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Username not found. Please create an account", "Username Not Found", JOptionPane.WARNING_MESSAGE);
         }
 
     }

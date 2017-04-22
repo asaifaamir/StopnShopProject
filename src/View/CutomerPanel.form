@@ -128,7 +128,7 @@
                   <title-color color="-16777216"/>
                 </border>
                 <children>
-                  <component id="69584" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+                  <component id="69584" class="javax.swing.JTable" binding="productTable">
                     <constraints/>
                     <properties>
                       <autoResizeMode value="4"/>
