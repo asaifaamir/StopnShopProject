@@ -17,7 +17,7 @@ import java.util.Arrays;
  */
 public class LoginPanelController {
 
-    AccountList database = AccountList.getInstance();
+    private AccountList database = AccountList.getInstance();
 
     /**
      * Login Action for the LoginPanel View which reacts to Login Button

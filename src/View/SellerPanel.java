@@ -24,6 +24,7 @@ public class SellerPanel {
     private JButton myAccountButton;
     private JButton logOutButton;
     private JButton updateProductButton;
+    private JScrollPane scrollPane;
     private SellerPanelController sellerPanelController;
 
     private Session session;
@@ -44,11 +45,13 @@ public class SellerPanel {
 
         logOutButton.addActionListener(e -> sellerPanelController.logOutButtonActionPerformed(frame));
         myAccountButton.addActionListener(e -> sellerPanelController.myAccountButtonActionPerformed(frame));
+        addProductButton.addActionListener(e -> sellerPanelController.addProductButtonActionPerformed(frame));
 
 
     }
 
     private void createUIComponents() {
+        scrollPane = new JScrollPane();
         inventory = new JTable();
         inventory.setModel(new DefaultTableModel(
                 new Object [][] {},
@@ -70,5 +73,6 @@ public class SellerPanel {
                 return canEdit [columnIndex];
             }
         });
+        scrollPane.setViewportView(inventory);
     }
 }

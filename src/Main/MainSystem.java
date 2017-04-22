@@ -42,6 +42,7 @@ public class MainSystem
     {
       ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
       stopNShopDatabase = (AccountList) in.readObject();
+        AccountList.replaceInstance(stopNShopDatabase);
       in.close();
     }
     else 
