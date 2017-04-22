@@ -4,7 +4,7 @@ import Model.Account;
 import Model.AccountList;
 import Model.Seller;
 import Model.Session;
-import View.CutomerPanel;
+import View.CustomerPanel;
 import View.SellerPanel;
 
 import javax.swing.*;
@@ -172,7 +172,7 @@ public class AccountInformationPanelController {
         frame.dispose();
         if (accountType.equals("customer"))
         {
-            CutomerPanel backToProductPanel = new CutomerPanel(currentUserSession);
+            CustomerPanel backToProductPanel = new CustomerPanel(currentUserSession);
         }
         if (accountType.equals("seller"))
         {

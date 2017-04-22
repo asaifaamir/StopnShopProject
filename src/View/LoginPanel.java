@@ -17,7 +17,7 @@ public class LoginPanel {
 
     public LoginPanel()
     {
-        loginPanelController = new LoginPanelController();
+
 
         JFrame frame = new JFrame();
         frame.setContentPane(loginPanel);
@@ -26,6 +26,8 @@ public class LoginPanel {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.getRootPane().setDefaultButton(loginButton);
+
+        loginPanelController = new LoginPanelController();
 
         loginButton.addActionListener(e -> loginPanelController.loginButtonActionPerformed(e, frame ,usernameField, passwordField));
         signUpButton.addActionListener(e -> loginPanelController.registerButtonActionPerformed(e, frame));

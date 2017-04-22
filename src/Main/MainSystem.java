@@ -3,7 +3,6 @@ package Main;
 import Model.AccountList;
 import View.LoginPanel;
 
-import javax.swing.*;
 import java.io.*;
 /**
  *
@@ -13,7 +12,7 @@ public class MainSystem
 {
   public static void main(String args[]) throws ClassNotFoundException, IOException 
   {
-    /* To set Nimbus look and feel */
+    /* To set Nimbus look and feel
     for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) 
     {
       try
@@ -28,7 +27,7 @@ public class MainSystem
               | IllegalAccessException | UnsupportedLookAndFeelException e)
       {
       }
-    }
+    }*/
 
     // Our main object that holds pretty much all of the data
     AccountList stopNShopDatabase;

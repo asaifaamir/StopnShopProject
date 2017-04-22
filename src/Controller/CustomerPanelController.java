@@ -61,14 +61,29 @@ public class CustomerPanelController {
      */
     public void viewCartButtonActionPerformed(JFrame frame) {
         frame.dispose();
-        CheckoutPanel checkoutPanel = new CheckoutPanel();
+        CheckoutPanel checkoutPanel = new CheckoutPanel(session);
     }
 
     /**
      * Clear cart action for the CutomerPanel View which reacts to ClearCartButton
      */
     public void clearCartButtonActionPerformed() {
+        customer.getShoppingCart().clear();
+        DecimalFormat df = new DecimalFormat("#.##");
+        cartTotalText.setText("$" + df.format(customer.getShoppingCart().calculateShoppingCartTotal()));
+        resetCheckBoxes();
 
+        stockCount.clear();
+        ArrayList<Seller> sellerList = database.getAllSellers();
+        ArrayList<Product> allItems = null;
+
+        // adds back original stock quantites to array
+        for(Seller seller : sellerList) {
+            allItems = seller.getList().getAllItems();
+            for(Product item : allItems) {
+                stockCount.add(item.getQuantity());
+            }
+        }
     }
 
     /**
@@ -148,6 +163,7 @@ public class CustomerPanelController {
 
                 stockCount.set(i, itemLimit);
                 productTableModel.setValueAt(0, i, 4);
+
             }
         }
 

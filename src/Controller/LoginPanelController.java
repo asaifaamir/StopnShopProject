@@ -4,7 +4,7 @@ import Model.AccountList;
 import Model.Customer;
 import Model.Seller;
 import Model.Session;
-import View.CutomerPanel;
+import View.CustomerPanel;
 import View.RegistrationPanel;
 import View.SellerPanel;
 
@@ -40,7 +40,7 @@ public class LoginPanelController {
                     Session userSession = new Session(username);
                     JOptionPane.showMessageDialog(null, "WELCOME " + (database.retrieve(username).getFirstName()).toUpperCase() + "!", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
-                    CutomerPanel customerScreen = new CutomerPanel(userSession);
+                    CustomerPanel customerScreen = new CustomerPanel(userSession);
                 }
                 else if (database.retrieve(username).getClass() == Seller.class)
                 {

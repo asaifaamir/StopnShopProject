@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * Created by asaifbutt on 4/10/17.
  */
-public class CutomerPanel {
+public class CustomerPanel {
 
     private JPanel productBrowse;
     private JTable productTable;
@@ -27,8 +27,9 @@ public class CutomerPanel {
      * Creates a productBrowserPanel object
      * @param userSession The current user that is loggedin
      */
-    public CutomerPanel(Session userSession)
+    public CustomerPanel(Session userSession)
     {
+
         JFrame frame = new JFrame();
         frame.setContentPane(productBrowse);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,6 +39,7 @@ public class CutomerPanel {
 
         setUpTable();
         customerPanelController = new CustomerPanelController(productTable, cartTotal, userSession);
+
         cartTotal.setEditable(false);
 
 
