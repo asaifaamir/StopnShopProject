@@ -12,23 +12,6 @@ public class MainSystem
 {
   public static void main(String args[]) throws ClassNotFoundException, IOException 
   {
-    /* To set Nimbus look and feel
-    for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) 
-    {
-      try
-      {
-        if("Nimbus".equals(info.getName())) 
-        {
-          UIManager.setLookAndFeel(info.getClassName());
-          break;
-        }
-      }
-      catch(ClassNotFoundException | InstantiationException 
-              | IllegalAccessException | UnsupportedLookAndFeelException e)
-      {
-      }
-    }*/
-
     // Our main object that holds pretty much all of the data
     AccountList stopNShopDatabase;
 

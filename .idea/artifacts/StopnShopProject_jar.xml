@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="StopnShopProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/StopnShopProject_jar</output-path>
+    <root id="archive" name="StopnShopProject.jar">
+      <element id="module-output" name="StopnShopProject" />
+    </root>
+  </artifact>
+</component>

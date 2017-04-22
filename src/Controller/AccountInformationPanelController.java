@@ -184,7 +184,7 @@ public class AccountInformationPanelController {
         seller = (Seller) database.retrieve(currentUserSession.getUserInSession());
         String costs = "$ " + Double.toString(seller.getList().getLifeTimeListCosts());
         String revenue = "$ " + Double.toString(seller.getRevenue());
-        String profit = "$ " + Double.toString(seller.getProfit());
+        String profit = "$ " + Double.toString(seller.calculateProfit());
 
         JOptionPane.showMessageDialog(null, "Costs: " + costs + "\n" + "Revenue: " + revenue + "\n" + "Profit: " + profit);
     }
