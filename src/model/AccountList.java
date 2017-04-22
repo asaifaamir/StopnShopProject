@@ -139,6 +139,10 @@ public class AccountList implements AccountListWrapper, Serializable
     return customerList;
   }
 
+  public static void replaceInstance(AccountList accountList) {
+    instance = accountList;
+  }
+
   /**
    * Returns a reference to the AccountList object
    * @return a reference to the AccountList 
@@ -160,5 +164,5 @@ public class AccountList implements AccountListWrapper, Serializable
 
   private final HashMap<Integer, Account> accountList;
   private int accountNumberID = 0;
-  private static final AccountList instance = new AccountList(); 
+  private static AccountList instance = new AccountList();
 }
