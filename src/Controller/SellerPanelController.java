@@ -164,7 +164,7 @@ public class SellerPanelController {
         ArrayList<Product> allItems = currentUser.getList().getAllItems();
 
         if(inventoryTable.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "There are no items in the inventory to update", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "There are no products in the inventory to update", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -174,7 +174,7 @@ public class SellerPanelController {
                 break;
             }
             else if(i == inventoryTable.getRowCount() - 1) {
-                JOptionPane.showMessageDialog(null, "No items are selected to update", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No products are selected to update", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
@@ -196,7 +196,7 @@ public class SellerPanelController {
             }
         }
 
-        JOptionPane.showMessageDialog(null, "Selected Items Have Been Updated", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Selected Products Have Been Updated", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
         resetCheckBoxes();
     }
 
@@ -209,7 +209,7 @@ public class SellerPanelController {
         ProductList productList = currentUser.getList();
 
         if(inventoryTable.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "There are no items in inventory to remove", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "There are no products in inventory to remove", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -219,7 +219,7 @@ public class SellerPanelController {
                 break;
             }
             else if(i == inventoryTable.getRowCount() - 1) {
-                JOptionPane.showMessageDialog(null, "No items are selected to remove", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No products are selected to remove", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
