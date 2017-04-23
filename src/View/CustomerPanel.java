@@ -61,7 +61,7 @@ public class CustomerPanel {
 
                 },
                 new String [] {
-                        "Product", "ProductID", "Price", "In Stock", "Quantity", "Seller", "Description", "Purchase"
+                        "Product", "ProductID", "Price", "In Stock", "Quantity to buy", "Seller", "Description", "Purchase"
                 }
         ) {
             Class[] types = new Class [] {
