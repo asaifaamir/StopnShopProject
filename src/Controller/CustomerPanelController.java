@@ -77,12 +77,12 @@ public class CustomerPanelController {
 
         stock.clear();
         ArrayList<Seller> sellerList = database.getAllSellers();
-        ArrayList<Product> allItems = null;
+        ArrayList<Product> allProducts = null;
 
         // adds back original stock quantities to array
         for(Seller seller : sellerList) {
-            allItems = seller.getList().getAllItems();
-            for(Product item : allItems) {
+            allProducts = seller.getList().getAllItems();
+            for(Product item : allProducts) {
                 stock.add(item.getQuantity());
             }
         }
@@ -103,7 +103,7 @@ public class CustomerPanelController {
         int itemLimit;
 
         if(productTable.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "There are no items to purchase", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "There are no products to purchase", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -113,7 +113,7 @@ public class CustomerPanelController {
                 break;
             }
             else if(i == productTable.getRowCount() - 1) {
-                JOptionPane.showMessageDialog(null, "No items are selected for purchase", "Error", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No products are selected for purchase", "Error", JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
@@ -173,7 +173,7 @@ public class CustomerPanelController {
         cartTotalText.setText("$" + df.format(customer.getShoppingCart().calculateShoppingCartTotal()));
         resetCheckBoxes();
 
-        JOptionPane.showMessageDialog(null, "Items added to Cart!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Products added to Cart!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         System.out.println(session);
     }
@@ -194,12 +194,12 @@ public class CustomerPanelController {
     private void loadInventoryFromAllSellers() {
         DefaultTableModel theProductTable = (DefaultTableModel) productTable.getModel();
         ArrayList<Seller> sellerList = database.getAllSellers();
-        ArrayList<Product> allItems = null;
+        ArrayList<Product> allProducts = null;
         stock = new LinkedList<>();
 
         for(Seller seller : sellerList) {
-            allItems = seller.getList().getAllItems();
-            for(Product item : allItems) {
+            allProducts = seller.getList().getAllItems();
+            for(Product item : allProducts) {
                 theProductTable.addRow(new Object[]{item.getName(), item.getID(), item.getSellingPrice(), item.getQuantity(),
                         0, seller.getUserName(), item.getProductDescription(), false});
 
@@ -207,13 +207,13 @@ public class CustomerPanelController {
             }
         }
 
-        replaceItemStockCount();
+        replaceProductStockCount();
     }
 
     /**
      * Method to keep a count of the stock
      */
-    private void replaceItemStockCount() {
+    private void replaceProductStockCount() {
         DefaultTableModel theProductTable = (DefaultTableModel) productTable.getModel();
         for(int i = 0; i < productTable.getRowCount(); i++) {
             String seller = (String)theProductTable.getValueAt(i, 5);
