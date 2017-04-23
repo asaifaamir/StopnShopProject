@@ -7,36 +7,51 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
+ * This class is the controller for CheckoutPanel view. It handles the action listeners from the view and interacts with the AccountList database and ProductList.
  * Created by asaifbutt on 4/22/17.
  */
 public class CheckoutPanelController {
 
-    private Customer customer;
     private AccountList database = AccountList.getInstance();
-    private ArrayList<Integer> stock;
+    private Customer customer;
+    private LinkedList<Integer> stock;
     private JTable cartInventory;
-    private Session customerSession;
+    private Session currentSession;
     private JTextField cartTotalText;
+    private DefaultTableModel theCartTable;
 
-    public CheckoutPanelController(JTable inventoryTable, Session currentSession, JTextField cartTotal) {
+    /**
+     * A constructor called when CheckoutPanelController object is created
+     * @param inventoryTable JTable object to display products added to cart by customer
+     * @param session current user in session
+     * @param cartTotal JTextField object to display the cart total
+     */
+    public CheckoutPanelController(JTable inventoryTable, Session session, JTextField cartTotal) {
         cartInventory = inventoryTable;
-        customerSession = currentSession;
+        currentSession = session;
         customer = (Customer) database.retrieve(currentSession.getUserInSession());
         cartTotalText = cartTotal;
+        theCartTable = (DefaultTableModel) cartInventory.getModel();
         loadCart();
         resetCheckBoxes();
     }
 
+    /**
+     * Back Action for the CheckoutPanel View which reacts to Back Button
+     * @param frame JFrame object to dispose the current frame
+     */
     public void backButtonActionPerformed(JFrame frame) {
         frame.dispose();
-        CustomerPanel backToCustomerPanel = new CustomerPanel(customerSession);
+        CustomerPanel backToCustomerPanel = new CustomerPanel(currentSession);
     }
 
+    /**
+     * Delete Action for the CheckoutPanel View which interacts the JTable and deletes the item from the cart on delete button press
+     */
     public void deleteButtonActionPerformed() {
-
-        DefaultTableModel theCartTable = (DefaultTableModel) cartInventory.getModel();
 
         for(int i = 0; i < cartInventory.getRowCount(); i++) {
             boolean isChecked = (boolean)cartInventory.getValueAt(i, 6);
@@ -64,15 +79,19 @@ public class CheckoutPanelController {
 
     }
 
+    /**
+     *Complete Purchase Action for the CheckoutPanel View. It completes a transaction when the customer click complete purchase button.
+     */
     public void completePurchaseButtonActionPerformed() {
-        int i = 0;
-        DefaultTableModel theCartTable = (DefaultTableModel) cartInventory.getModel();
 
+        //Checks if the cart is empty
         if(cartInventory.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Cart is empty.", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
+        //Goes through the items in the shopping cart and makes changes to the seller database in the Model.
+        int i = 0;
         for(Product item : customer.getShoppingCart().getAllItems()) {
             Seller theSeller = (Seller)database.retrieve((String)theCartTable.getValueAt(i, 3));
             String productID = (String)theCartTable.getValueAt(i, 1);
@@ -86,13 +105,19 @@ public class CheckoutPanelController {
         JOptionPane.showMessageDialog(null, "Thank you for shopping with us :)", "Success", JOptionPane.INFORMATION_MESSAGE);
         deleteAllItemsFromCart();
         loadCartTotal();
-
     }
 
+    /**
+     * Update Action for the CheckoutPanel View. It makes updates(if any) to the quantity of the item in the cart
+     */
     public void updateButtonActionPerformed() {
-        DefaultTableModel theCartTable = (DefaultTableModel) cartInventory.getModel();
-        Seller theSeller; String productID; Product itemPurchased; Integer quantitySold;
-        Product productToAdd; Product itemInCart = null; int itemLimit;
+
+        Seller seller;
+        String productID;
+        Product product;
+        Integer updatedQuantity;
+        Product itemInCart = null;
+        int itemLimit;
 
         if(cartInventory.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "There are no items", "Error", JOptionPane.WARNING_MESSAGE);
@@ -114,18 +139,18 @@ public class CheckoutPanelController {
             boolean isChecked = (boolean)cartInventory.getValueAt(i, 6);
 
             if(isChecked) {
-                theSeller = (Seller)database.retrieve((String)theCartTable.getValueAt(i, 3));
+                seller = (Seller)database.retrieve((String)theCartTable.getValueAt(i, 3));
                 productID = (String)theCartTable.getValueAt(i, 1);
-                itemPurchased = theSeller.getList().getProduct(productID);
-                quantitySold = (Integer)theCartTable.getValueAt(i, 5);
+                product = seller.getList().getProduct(productID);
+                updatedQuantity = (Integer)theCartTable.getValueAt(i, 5);
                 itemLimit = stock.get(i);
 
-                if(quantitySold > itemPurchased.getQuantity()) {
+                if(updatedQuantity > product.getQuantity()) {
                     JOptionPane.showMessageDialog(null, "Cannot purchase more than whats in stock.", "Error", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
-                if(quantitySold > itemLimit) {
+                if(updatedQuantity > itemLimit) {
                     JOptionPane.showMessageDialog(null, "Cannot purchase more than whats in stock.", "Error", JOptionPane.WARNING_MESSAGE);
 
                     if(itemLimit == 0) {
@@ -134,8 +159,8 @@ public class CheckoutPanelController {
                     return;
                 }
 
-                if(quantitySold <= 0) {
-                    if(quantitySold == 0)
+                if(updatedQuantity <= 0) {
+                    if(updatedQuantity == 0)
                         JOptionPane.showMessageDialog(null, "You have no specified a quantity", "Error", JOptionPane.WARNING_MESSAGE);
                     else
                         JOptionPane.showMessageDialog(null, "You cannot purchase negative amounts", "Error", JOptionPane.WARNING_MESSAGE);
@@ -145,8 +170,8 @@ public class CheckoutPanelController {
 
                 if(customer.getShoppingCart().search(productID)) {
                     itemInCart = customer.getShoppingCart().getProductInstance(productID);
-                    itemInCart.setQuantity(itemInCart.getQuantity() + quantitySold);
-                    itemLimit -= quantitySold;
+                    itemInCart.setQuantity(itemInCart.getQuantity() + updatedQuantity);
+                    itemLimit -= updatedQuantity;
                 }
 
                 stock.set(i, itemLimit);
@@ -159,6 +184,9 @@ public class CheckoutPanelController {
         loadCartTotal();
     }
 
+    /**
+     * Method to reset checkboxes in the JTable
+     */
     private void resetCheckBoxes() {
         DefaultTableModel cartTable = (DefaultTableModel) cartInventory.getModel();
         for(int i = 0; i < cartTable.getRowCount(); i++) {
@@ -166,6 +194,9 @@ public class CheckoutPanelController {
         }
     }
 
+    /**
+     * Method to load the cart with the products added in the cart
+     */
     private void loadCart() {
         DefaultTableModel cartTable = (DefaultTableModel) cartInventory.getModel();
         ArrayList<Product> customerCart = customer.getShoppingCart().getAllItems();
@@ -175,7 +206,7 @@ public class CheckoutPanelController {
         }
         loadCartTotal();
 
-        stock = new ArrayList<>();
+        stock = new LinkedList<>();
         for(int i = 0; i < cartTable.getRowCount(); i++) {
             String seller = (String)cartTable.getValueAt(i, 3);
             Seller theSeller = (Seller)database.retrieve(seller);
@@ -187,11 +218,17 @@ public class CheckoutPanelController {
 
     }
 
+    /**
+     * Method to set the JTextField for cart total
+     */
     private void loadCartTotal() {
         DecimalFormat df = new DecimalFormat("#.##");
         cartTotalText.setText("$" + df.format(customer.getShoppingCart().calculateShoppingCartTotal()));
     }
 
+    /**
+     * Method to clear the cart
+     */
     private void deleteAllItemsFromCart() {
         DefaultTableModel theCartTable = (DefaultTableModel) cartInventory.getModel();
         customer.getShoppingCart().clear();

@@ -7,9 +7,9 @@ import Model.Account;
  */
 public interface AccountListWrapper
 { 
-  public void insert(Account data);
-  public void remove(String userName);
-  public Account retrieve(String userName);
-  public boolean search(String userName);
-  public int size();
+  void insert(Account data);
+  void remove(String userName);
+  Account retrieve(String userName);
+  boolean search(String userName);
+  int size();
 }

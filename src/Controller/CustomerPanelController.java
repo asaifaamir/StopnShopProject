@@ -7,10 +7,13 @@ import View.LoginPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
+ * This class is the controller for CustomerPanel view. It handles the action listeners from the view and interacts with the AccountList database and ProductList.
  * Created by asaifbutt on 4/18/17.
  */
 public class CustomerPanelController {
@@ -20,52 +23,51 @@ public class CustomerPanelController {
     private JTextArea cartTotalText;
     Customer customer;
     Session session;
-    ArrayList<Integer> stockCount;
+    LinkedList<Integer> stock;
+    JFrame frame;
 
     /**
      * Creates a CustomerPanelController object
      * @param table1 the product table to display products
-     * @param cartTotal cartTotal text aread to display the cart total
+     * @param cartTotal cartTotal text area to display the cart total
+     * @param userSession current user in session
      */
-    public CustomerPanelController(JTable table1, JTextArea cartTotal, Session userSession) {
+    public CustomerPanelController(JFrame jFrame, JTable table1, JTextArea cartTotal, Session userSession) {
         customer = (Customer) database.retrieve(userSession.getUserInSession());
         productTable = table1;
         cartTotalText = cartTotal;
         session = userSession;
+        frame =jFrame;
         loadInventoryFromAllSellers();
         loadCartTotal();
-
     }
 
     /**
-     * My Account Action for the CutomerPanel View which reacts to MyAccount Button
-     * @param frame the frame that the action is being performed on
+     * My Account Action for the CustomerPanel View which reacts to MyAccount Button
      */
-    public void myAccountButtonActionPerformed(JFrame frame) {
+    public void myAccountButtonActionPerformed() {
         frame.dispose();
         CustomerInformationPanel customerInfo = new CustomerInformationPanel(session);
     }
 
     /**
-     * Log Out Action for the CutomerPanel View which reacts to LogOutButton
-     * @param frame the frame that the action is being performed on
+     * Log Out Action for the CustomerPanel View which reacts to LogOutButton
      */
-    public void logOutButtonActionPerformed(JFrame frame) {
+    public void logOutButtonActionPerformed() {
         frame.dispose();
         LoginPanel backToLogin = new LoginPanel();
     }
 
     /**
-     * View Cart Action for the CutomerPanel View which reacts to ViewCartButton
-     * @param frame the frame that the action is being performed on
+     * View Cart Action for the CustomerPanel View which reacts to ViewCartButton
      */
-    public void viewCartButtonActionPerformed(JFrame frame) {
+    public void viewCartButtonActionPerformed() {
         frame.dispose();
         CheckoutPanel checkoutPanel = new CheckoutPanel(session);
     }
 
     /**
-     * Clear cart action for the CutomerPanel View which reacts to ClearCartButton
+     * Clear cart action for the CustomerPanel View which reacts to ClearCartButton
      */
     public void clearCartButtonActionPerformed() {
         customer.getShoppingCart().clear();
@@ -73,21 +75,21 @@ public class CustomerPanelController {
         cartTotalText.setText("$" + df.format(customer.getShoppingCart().calculateShoppingCartTotal()));
         resetCheckBoxes();
 
-        stockCount.clear();
+        stock.clear();
         ArrayList<Seller> sellerList = database.getAllSellers();
         ArrayList<Product> allItems = null;
 
-        // adds back original stock quantites to array
+        // adds back original stock quantities to array
         for(Seller seller : sellerList) {
             allItems = seller.getList().getAllItems();
             for(Product item : allItems) {
-                stockCount.add(item.getQuantity());
+                stock.add(item.getQuantity());
             }
         }
     }
 
     /**
-     * Add to Cart action for the CutomerPanel View which reacts to the Add to Cart Button
+     * Add to Cart action for the CustomerPanel View which reacts to the Add to Cart Button
      */
     public void addToCartButtonActionPerformed() {
 
@@ -106,7 +108,7 @@ public class CustomerPanelController {
         }
 
         for(int i = 0; i < productTable.getRowCount(); i++) {
-            boolean isChecked = (boolean)productTable.getValueAt(i, 6);
+            boolean isChecked = (boolean)productTable.getValueAt(i, 7);
             if(isChecked) {
                 break;
             }
@@ -117,14 +119,14 @@ public class CustomerPanelController {
         }
 
         for(int i = 0; i < productTable.getRowCount(); i++) {
-            boolean isChecked = (boolean)productTable.getValueAt(i, 6);
+            boolean isChecked = (boolean)productTable.getValueAt(i, 7);
 
             if(isChecked) {
                 theSeller = (Seller)database.retrieve((String)productTableModel.getValueAt(i, 5));
                 productID = (String)productTableModel.getValueAt(i, 1);
                 itemPurchased = theSeller.getList().getProduct(productID);
                 quantitySold = (Integer)productTableModel.getValueAt(i, 4);
-                itemLimit = stockCount.get(i);
+                itemLimit = stock.get(i);
 
                 if(quantitySold > itemPurchased.getQuantity()) {
                     JOptionPane.showMessageDialog(null, "Cannot purchase more than whats in stock.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -161,7 +163,7 @@ public class CustomerPanelController {
                     itemLimit -= quantitySold;
                 }
 
-                stockCount.set(i, itemLimit);
+                stock.set(i, itemLimit);
                 productTableModel.setValueAt(0, i, 4);
 
             }
@@ -176,34 +178,41 @@ public class CustomerPanelController {
         System.out.println(session);
     }
 
+    /**
+     * Method to reset the checkboxes on the table
+     */
     private void resetCheckBoxes() {
         DefaultTableModel theProductTable = (DefaultTableModel) productTable.getModel();
         for(int i = 0; i < productTable.getRowCount(); i++) {
-            theProductTable.setValueAt(false, i, 6);
+            theProductTable.setValueAt(false, i, 7);
         }
     }
 
+    /**
+     * Method to load the inventory from each seller into the table
+     */
     private void loadInventoryFromAllSellers() {
-        // this one is essentially pretty self explanatory. Each seller in the database and their
-        // inventory is access and uploaded t othe jtable.
         DefaultTableModel theProductTable = (DefaultTableModel) productTable.getModel();
         ArrayList<Seller> sellerList = database.getAllSellers();
         ArrayList<Product> allItems = null;
-        stockCount = new ArrayList<>();
+        stock = new LinkedList<>();
 
         for(Seller seller : sellerList) {
             allItems = seller.getList().getAllItems();
             for(Product item : allItems) {
                 theProductTable.addRow(new Object[]{item.getName(), item.getID(), item.getSellingPrice(), item.getQuantity(),
-                        0, seller.getUserName(), false});
+                        0, seller.getUserName(), item.getProductDescription(), false});
 
-                stockCount.add(item.getQuantity());
+                stock.add(item.getQuantity());
             }
         }
 
         replaceItemStockCount();
     }
 
+    /**
+     * Method to keep a count of the stock
+     */
     private void replaceItemStockCount() {
         DefaultTableModel theProductTable = (DefaultTableModel) productTable.getModel();
         for(int i = 0; i < productTable.getRowCount(); i++) {
@@ -213,17 +222,32 @@ public class CustomerPanelController {
             String productID = (String)theProductTable.getValueAt(i, 1);
 
             if(customer.getShoppingCart().search(productID)) {
-                stockCount.set(i, quantity -
+                stock.set(i, quantity -
                         customer.getShoppingCart().getProduct(productID).getQuantity());
             }
             else {
-                stockCount.set(i, quantity);
+                stock.set(i, quantity);
             }
         }
     }
 
+    /**
+     * Method to update the cart total on the cart total text panel on the frame
+     */
     private void loadCartTotal() {
         DecimalFormat df = new DecimalFormat("#.##");
         cartTotalText.setText("$" + df.format(customer.getShoppingCart().calculateShoppingCartTotal()));
+    }
+
+    public void productDescriptionAction(MouseEvent e) {
+
+            JTable target = (JTable)e.getSource();
+            int row = target.getSelectedRow();
+            int column = target.getSelectedColumn();
+            Seller theSeller = (Seller)database.retrieve(productTable.getValueAt(productTable.getSelectedRow(), 5).toString());
+            String productId = (productTable.getValueAt(productTable.getSelectedRow(), 1).toString());
+            String description = theSeller.getList().getProduct(productId).getProductDescription();
+            String productName = theSeller.getList().getProduct(productId).getName();
+            JOptionPane.showMessageDialog(null, description, productName,JOptionPane.INFORMATION_MESSAGE);
     }
 }

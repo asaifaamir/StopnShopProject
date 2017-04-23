@@ -6,37 +6,41 @@ import Model.Seller;
 import View.LoginPanel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 /**
+ * This class is the controller for RegistrationPanel view. It handles the action listeners from the view and interacts with the AccountList database.
  * Created by asaifbutt on 4/18/17.
  */
 public class RegistrationPanelController {
 
     AccountList database = AccountList.getInstance();
+    private JFrame frame;
+
+    public RegistrationPanelController(JFrame registrationFrame) {
+        frame = registrationFrame;
+    }
 
     /**
      * Cancel action for the RegistrationPanel to go back to the login screen
-     * @param e Takes an action event object
-     * @param frame The frame on which action is performed
      */
-    public void cancelButtonActionPerformed(ActionEvent e, JFrame frame) {
+    public void cancelButtonActionPerformed() {
         frame.dispose();
         LoginPanel backToLogin = new LoginPanel();
     }
 
     /**
-     * Registration action for the RegistrationPanel to add a new Account
-     * @param e Takes an action event object
-     * @param frame The frame on which action is performed
-     * @param firstName full name of the user
-     * @param userName username for the account
-     * @param password password for the account
-     * @param passwordConfirm confirmed password for the account
-     * @param creditCard credit card information for the account
-     * @param ccv ccv for credit card
+     * Register action for the registrationPanel to add a new account in AccountList
+     * @param accountTypeBox JComboBox object for the account type
+     * @param firstName JTextField object for first name
+     * @param lastName JTextField object for last name
+     * @param userName JTextField object for username
+     * @param password JPasswordField object for password
+     * @param passwordConfirm JPasswordField for password
+     * @param creditCard JTextField for credit card
+     * @param ccv JTextField for credit card ccv
+     * @param expDate JTextField for expiration date
      */
-    public void registerButtonActionPerformed(ActionEvent e, JFrame frame, JComboBox accountTypeBox, JTextField firstName, JTextField lastName, JTextField userName,
+    public void registerButtonActionPerformed(JComboBox accountTypeBox, JTextField firstName, JTextField lastName, JTextField userName,
                                               JPasswordField password, JPasswordField passwordConfirm, JTextField creditCard, JTextField ccv, JTextField expDate)
     {
         String[] input = new String[8];
@@ -135,8 +139,6 @@ public class RegistrationPanelController {
                 LoginPanel backToLogin = new LoginPanel();
             }
         }
-
-
 
     }
 }

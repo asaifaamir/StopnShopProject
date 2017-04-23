@@ -5,9 +5,9 @@ import Model.Session;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 
 /**
+ * This view is where seller can add new products to sell.
  * Created by asaifbutt on 4/19/17.
  */
 public class SellerPanel {
@@ -25,11 +25,12 @@ public class SellerPanel {
     private JButton myAccountButton;
     private JButton logOutButton;
     private JButton updateProductButton;
-    private JScrollPane scrollPane;
     private SellerPanelController sellerPanelController;
 
-    private Session session;
-
+    /**
+     * Constructor for SellerPanel to create the JFrame when sellerPanel when object is created
+     * @param userSession the user currently in session
+     */
     public SellerPanel(Session userSession)
     {
         JFrame frame = new JFrame();
@@ -40,24 +41,11 @@ public class SellerPanel {
         frame.setVisible(true);
 
         setUpTable();
-        scrollPane.setColumnHeader(new JViewport() {
-            @Override public Dimension getPreferredSize() {
-                Dimension d = super.getPreferredSize();
-                d.width = 5;
-                return d;
-            }
-        });
 
-        scrollPane.setColumnHeaderView(inventoryTable);
+        sellerPanelController = new SellerPanelController(userSession, frame, inventoryTable, productIDField, invoicePriceField, descriptionField, sellingPriceField, quantityField, productNameField, productTypeField);
 
-        scrollPane.setViewportView(inventoryTable);
-
-        session = userSession;
-
-        sellerPanelController = new SellerPanelController(userSession, inventoryTable, productIDField, invoicePriceField, descriptionField, sellingPriceField, quantityField, productNameField, productTypeField);
-
-        logOutButton.addActionListener(e -> sellerPanelController.logOutButtonActionPerformed(frame));
-        myAccountButton.addActionListener(e -> sellerPanelController.myAccountButtonActionPerformed(frame));
+        logOutButton.addActionListener(e -> sellerPanelController.logOutButtonActionPerformed());
+        myAccountButton.addActionListener(e -> sellerPanelController.myAccountButtonActionPerformed());
         addProductButton.addActionListener(e -> sellerPanelController.addProductButtonActionPerformed());
         updateProductButton.addActionListener(e -> sellerPanelController.updateProductButtonActionPerformed());
         deleteProductButton.addActionListener(e -> sellerPanelController.deleteProductButtonActionPerformed());
@@ -65,6 +53,9 @@ public class SellerPanel {
 
     }
 
+    /**
+     * Method to setup the JTable in SellerPanel frame
+     */
     private void setUpTable() {
         inventoryTable.setModel(new DefaultTableModel(
                 new Object[][] {},

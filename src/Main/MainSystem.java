@@ -32,12 +32,8 @@ public class MainSystem
       stopNShopDatabase = AccountList.getInstance();
     }
 
-    //Updated upstream
-    // The landing page JFrame to the sign in screen
+    // The starting JFrame of login screen
     LoginPanel loginPanel = new LoginPanel();
-
-    // Create a new instance of the LandingScreen Jframe
-     //Stashed changes
 
     // This runs a thread when the compiler detects that the program is exiting
     Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() 

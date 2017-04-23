@@ -9,24 +9,32 @@ import View.RegistrationPanel;
 import View.SellerPanel;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
 /**
+ * This class is the controller for LoginPanel view. It handles the action listeners from the view and interacts with the AccountList database.
  * Created by asaifbutt on 4/17/17.
  */
 public class LoginPanelController {
 
     private AccountList database = AccountList.getInstance();
+    JFrame frame;
+
+    /**
+     * Constructor for LoginPanelController called when loginPanelController object is created
+     * @param jFrame JFrame object to dispose current frame
+     */
+    public LoginPanelController(JFrame jFrame)
+    {
+        frame = jFrame;
+    }
 
     /**
      * Login Action for the LoginPanel View which reacts to Login Button
-     * @param e takes an Action Event object
-     * @param frame the frame on which the action is performed
      * @param userNameField the username field to get the username
      * @param passwordField1 the password field to get the password
      */
-    public void loginButtonActionPerformed(ActionEvent e, JFrame frame, JTextField userNameField, JPasswordField passwordField1)
+    public void loginButtonActionPerformed(JTextField userNameField, JPasswordField passwordField1)
     {
         String username = userNameField.getText();
         char[] password = passwordField1.getPassword();
@@ -66,13 +74,13 @@ public class LoginPanelController {
     }
 
     /**
-     * Private method to check the password for the username
+     * Method to check the password for the username
      * @param username username to check the password for
      * @param password password entered
-     * @return
+     * @return true is password is correct else return false
      */
     private boolean isPasswordCorrect(String username, char[] password) {
-        boolean isCorrect = true;
+        boolean isCorrect;
         char[] correctPassword = (database.retrieve(username).getPassword()).toCharArray();
 
         if (password.length != correctPassword.length) {
@@ -89,10 +97,8 @@ public class LoginPanelController {
 
     /**
      * Register Action for the LoginPanel View which reacts to RegisterationButton
-     * @param e Takes an Action event object
-     * @param frame The frame on which the action is performed
      */
-    public void registerButtonActionPerformed(ActionEvent e, JFrame frame) {
+    public void registerButtonActionPerformed() {
         frame.dispose();
         RegistrationPanel registration = new RegistrationPanel();
 

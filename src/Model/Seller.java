@@ -75,9 +75,9 @@ public class Seller extends Account implements Serializable
      * Calculates the total profit made by the Seller
      * @return the total profit made by the seller
      */
-    public double calculateProfit()
+    public void calculateProfit()
     {
-      return revenue - getList().getLifeTimeListCosts();
+      profit = revenue - getList().getLifeTimeListCosts();
     }
     
     /**

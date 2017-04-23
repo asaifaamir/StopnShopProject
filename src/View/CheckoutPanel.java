@@ -6,6 +6,7 @@ import Model.Session;
 import javax.swing.*;
 
 /**
+ * The CheckoutPanel class is the view for the customer to checkout the items in the cart
  * Created by asaifbutt on 4/19/17.
  */
 public class CheckoutPanel {
@@ -18,8 +19,11 @@ public class CheckoutPanel {
     private JButton completePurchaseButton;
     private JButton updateButton;
 
-    private Session customerSession;
 
+    /**
+     * Constructor for CheckoutPanel to create the JFrame when checkoutpanel object is created
+     * @param currentSession The current user is session
+     */
     public CheckoutPanel(Session currentSession)
     {
         JFrame frame = new JFrame();
@@ -30,7 +34,7 @@ public class CheckoutPanel {
         frame.setVisible(true);
 
         setUpTable();
-        customerSession = currentSession;
+
         CheckoutPanelController checkoutPanelController = new CheckoutPanelController(productTable, currentSession, cartTotal);
         backButton.addActionListener(e -> checkoutPanelController.backButtonActionPerformed(frame));
         deleteButton.addActionListener(e -> checkoutPanelController.deleteButtonActionPerformed());
@@ -40,6 +44,9 @@ public class CheckoutPanel {
 
     }
 
+    /**
+     * Method to setup the JTable in the Checkout Panel
+     */
     private void setUpTable()
     {
         productTable.setModel(new javax.swing.table.DefaultTableModel(

@@ -10,6 +10,7 @@ import View.SellerPanel;
 import javax.swing.*;
 
 /**
+ * This class is the controller for AccountInformationPanel view. It handles the action listeners from the view and interacts with the AccountList database.
  * Created by asaifbutt on 4/19/17.
  */
 public class AccountInformationPanelController {
@@ -25,17 +26,25 @@ public class AccountInformationPanelController {
     private JTextField ccvField;
     private JTextField expirationDateField;
     private JLabel titleField;
-
-    private Seller seller;
+    private JFrame frame;
 
     private boolean edit = false;
 
 
     /**
-     * Creates a AccountInformationPanelController object
-     * @param currentUser the current user logged in
+     * A constructor called when AccountInformationPanelController object is created
+     * @param currentUser user currently in session
+     * @param AccountInfoFrame JFrame object to dispose current frame
+     * @param firstName JTextField object for first name of the account
+     * @param lastName JTextField object for last name of the account
+     * @param userName JTextField object for username of the account
+     * @param password JTextField object for password of the account
+     * @param creditCard JTextField object for credit card of the account
+     * @param ccv JTextField object for ccv of the account
+     * @param expirationDate JTextField object for expirationDate of creditcard on the account
+     * @param title JLabel object to change the title on the frame
      */
-    public AccountInformationPanelController(Session currentUser, JTextField firstName, JTextField lastName, JTextField userName, JTextField password, JTextField creditCard, JTextField ccv, JTextField expirationDate, JLabel title) {
+    public AccountInformationPanelController(Session currentUser, JFrame AccountInfoFrame, JTextField firstName, JTextField lastName, JTextField userName, JTextField password, JTextField creditCard, JTextField ccv, JTextField expirationDate, JLabel title) {
         currentUserSession = currentUser;
         currentUserInfo = database.retrieve(currentUser.getUserInSession());
         firstNameField = firstName;
@@ -46,12 +55,13 @@ public class AccountInformationPanelController {
         ccvField = ccv;
         expirationDateField = expirationDate;
         titleField = title;
+        frame = AccountInfoFrame;
         getAccountInfo();
         setTitle();
     }
 
     /**
-     * A method to set the Title of the Account page by retrieving the first name of the current user from the database
+     * A method to set the title of the Account page by retrieving the first name of the current user from the database
      */
     private void setTitle()
     {
@@ -70,15 +80,14 @@ public class AccountInformationPanelController {
         creditCardField.setText(currentUserInfo.getCreditCard());
         ccvField.setText(currentUserInfo.getCCV());
         expirationDateField.setText(currentUserInfo.getExpDate());
-
-
     }
 
     /**
      * Update Account Action for the CustomerInformationPanel View which reacts to Update Account Button
-     * @param frame The frame where the action takes place
+     * @param updateAccountButton JButton object for updateAccountButton
+     * @param backButton JButton object for backButton
      */
-    public void updateAccountButtonActionPerformed(JFrame frame, JButton updateAccountButton, JButton backButton) {
+    public void updateAccountButtonActionPerformed(JButton updateAccountButton, JButton backButton) {
         if (!edit) {
             edit = true;
             backButton.setEnabled(false);
@@ -92,6 +101,7 @@ public class AccountInformationPanelController {
         }
         else if (edit)
         {
+            //Get the current text on the JTextField objects
             String[] userInput = new String[5];
             userInput[0] = firstNameField.getText().trim();
             userInput[1] = lastNameField.getText().trim();
@@ -99,6 +109,7 @@ public class AccountInformationPanelController {
             userInput[3] = creditCardField.getText().trim();
             userInput[4] = ccvField.getText().trim();
 
+            //Error checking
             if(userInput[0].length() < 1)
             {
                 JOptionPane.showMessageDialog(null, "Cannot leave first name field blank", "Error", JOptionPane.WARNING_MESSAGE);
@@ -139,6 +150,7 @@ public class AccountInformationPanelController {
                 return;
             }
 
+            //Make the new changes
             edit = false;
             currentUserInfo.setFirstName(userInput[0]);
             currentUserInfo.setLastName(userInput[1]);
@@ -159,16 +171,15 @@ public class AccountInformationPanelController {
 
             JOptionPane.showMessageDialog(null, "Account Updated!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-
         }
 
     }
 
     /**
-     * * Back Action for the CustomerInformationPanel View which reacts to BackButton
-     * @param frame The frame where the action takes place
+     * Back Action for the CustomerInformationPanel View which reacts to Back Button
+     * @param accountType the type of account. Depending on the type of account in session the back button will go to the panel accordingly
      */
-    public void backButtonActionPerformed(JFrame frame, String accountType) {
+    public void backButtonActionPerformed(String accountType) {
         frame.dispose();
         if (accountType.equals("customer"))
         {
@@ -180,11 +191,14 @@ public class AccountInformationPanelController {
         }
     }
 
+    /**
+     * CheckSales action for the CustomerInformationPanel View which reacts to checkSales Button. It displays a message dialog with the seller stats
+     */
     public void checkSalesButtonActionPerformed() {
-        seller = (Seller) database.retrieve(currentUserSession.getUserInSession());
+        Seller seller = (Seller) database.retrieve(currentUserSession.getUserInSession());
         String costs = "$ " + Double.toString(seller.getList().getLifeTimeListCosts());
         String revenue = "$ " + Double.toString(seller.getRevenue());
-        String profit = "$ " + Double.toString(seller.calculateProfit());
+        String profit = "$ " + Double.toString(seller.getProfit());
 
         JOptionPane.showMessageDialog(null, "Costs: " + costs + "\n" + "Revenue: " + revenue + "\n" + "Profit: " + profit);
     }

@@ -3,9 +3,9 @@ package View;
 import Controller.RegistrationPanelController;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
+ * This class is the view where a user can signup and register a new account.
  * Created by asaifbutt on 4/6/17.
  */
 public class RegistrationPanel extends javax.swing.JFrame {
@@ -23,8 +23,11 @@ public class RegistrationPanel extends javax.swing.JFrame {
     private JTextField expDate;
     private RegistrationPanelController registrationPanelController;
 
-    public RegistrationPanel() throws HeadlessException {
-        registrationPanelController = new RegistrationPanelController();
+    /**
+     * Constructor for RegistrationPanel to create the JFrame when RegistrationPanel object is created
+     */
+    public RegistrationPanel(){
+
         JFrame frame = new JFrame();
         frame.setContentPane(registration);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,9 +37,10 @@ public class RegistrationPanel extends javax.swing.JFrame {
 
         frame.getRootPane().setDefaultButton(registerButton);
 
+        registrationPanelController = new RegistrationPanelController(frame);
 
-        cancelButton.addActionListener(e -> registrationPanelController.cancelButtonActionPerformed(e, frame));
-        registerButton.addActionListener(e -> registrationPanelController.registerButtonActionPerformed(e, frame, accountTypeBox, firstName, lastName, userName, password, passwordConfirm, creditCard, ccv, expDate));
+        cancelButton.addActionListener(e -> registrationPanelController.cancelButtonActionPerformed());
+        registerButton.addActionListener(e -> registrationPanelController.registerButtonActionPerformed(accountTypeBox, firstName, lastName, userName, password, passwordConfirm, creditCard, ccv, expDate));
 
     }
 

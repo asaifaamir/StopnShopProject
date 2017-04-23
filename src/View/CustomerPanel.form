@@ -16,7 +16,10 @@
         <constraints>
           <card name="Card1"/>
         </constraints>
-        <properties/>
+        <properties>
+          <minimumSize width="500" height="500"/>
+          <preferredSize width="700" height="700"/>
+        </properties>
         <border type="none"/>
         <children>
           <grid id="b1912" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -91,7 +94,7 @@
                   <text value="Clear Cart"/>
                 </properties>
               </component>
-              <component id="c6094" class="javax.swing.JLabel" binding="jLabel1">
+              <component id="c6094" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>

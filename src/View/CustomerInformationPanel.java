@@ -6,6 +6,7 @@ import Model.Session;
 import javax.swing.*;
 
 /**
+ * This class is the view that displays customer account information and allows customer to edit their account.
  * Created by asaifbutt on 4/19/17.
  */
 public class CustomerInformationPanel {
@@ -24,8 +25,8 @@ public class CustomerInformationPanel {
 
 
     /**
-     * Create a CustomerInformationPanel Object
-     * @param currentUser The user currently logged in
+     * Constructor for CustomerInformationPanel to create the JFrame when CustomerInformationPanel object is created
+     * @param currentUser The user currently in session
      */
     public CustomerInformationPanel(Session currentUser) {
         JFrame frame = new JFrame();
@@ -35,10 +36,10 @@ public class CustomerInformationPanel {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        customerInfoController = new AccountInformationPanelController(currentUser, firstName, lastName, userName, password, creditCard, ccv, expirationDate, titleNameLabel);
+        customerInfoController = new AccountInformationPanelController(currentUser, frame, firstName, lastName, userName, password, creditCard, ccv, expirationDate, titleNameLabel);
 
-        updateAccountButton.addActionListener(e -> customerInfoController.updateAccountButtonActionPerformed(frame, updateAccountButton, backButton));
-        backButton.addActionListener(e -> customerInfoController.backButtonActionPerformed(frame, "customer"));
+        updateAccountButton.addActionListener(e -> customerInfoController.updateAccountButtonActionPerformed(updateAccountButton, backButton));
+        backButton.addActionListener(e -> customerInfoController.backButtonActionPerformed("customer"));
 
 
     }
