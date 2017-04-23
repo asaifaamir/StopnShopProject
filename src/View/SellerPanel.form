@@ -37,7 +37,7 @@
                 </constraints>
                 <properties>
                   <font name="Monospaced" size="28" style="1"/>
-                  <text value="One Stop Shop"/>
+                  <text value="STOP N SHOP"/>
                 </properties>
               </component>
               <component id="c12c" class="javax.swing.JButton" binding="logOutButton" default-binding="true">
